@@ -1,13 +1,86 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  width: 90%;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: MarkPro, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.App {
+  color: black;
+}
+
+.header-container {
+  border: 2px solid black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: red;
+}
+
+.navbar-container {
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+}
+
+.search {
+  border-radius: 50px;
+  background-color: transparent;
+  color: black;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  margin: 1em;
+}
+
+.addStudent {
+  border-radius: 50px;
+  background-color: transparent;
+  color: black;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  margin: 1em;
+}
+
+.results-box {
+  width: 100%;
+  height: 60vh;
+  border: 2px solid black;
+  justify-content: center;
+  overflow: hidden auto;
+  margin-top: 3em;
+}
+
+.student-list {
+  justify-content: center;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 3em;
+  padding: 0;
+}
+
+.student {
+  border: 2px solid #be1c3f;
+  border-radius: 3px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  width: 300px;
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
 }
