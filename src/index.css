@@ -13,10 +13,6 @@ code {
     monospace;
 }
 
-.App {
-  color: black;
-}
-
 .header-container {
   border: 2px solid black;
   border-radius: 5px;
@@ -24,8 +20,14 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   width: 100%;
   background: #bb1919;
+}
+
+.header-link {
+  text-decoration: none;
+  color: white;
 }
 
 /* NAVBAR */
@@ -69,6 +71,37 @@ code {
   text-decoration: none;
 }
 
+/* main body container */
+
+.main-body {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  text-align: center;
+  width: 100%;
+  height: 70vh;
+  border: 2px solid black;
+  border-radius: 5px;
+  justify-content: center;
+  overflow: hidden auto;
+  margin-top: 1em;
+}
+
+.loader {
+  width: 3em !important;
+}
+
+/* Styling for list components */
+
+.list {
+  justify-content: center;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 3em;
+  padding: 0;
+}
+
 /* .search {
   border-radius: 50px;
   background-color: transparent;
@@ -79,7 +112,7 @@ code {
   margin: 1em;
 } */
 
-.addStudent {
+/* .addStudent {
   border-radius: 50px;
   background-color: transparent;
   color: black;
@@ -87,31 +120,9 @@ code {
   font-size: 1.2rem;
   padding: 0.5rem 1.5rem;
   margin: 1em;
-}
+} */
 
-.results-box {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  height: 60vh;
-  border: 2px solid black;
-  border-radius: 5px;
-  justify-content: center;
-  overflow: hidden auto;
-  margin-top: 1em;
-}
-
-.student-list {
-  justify-content: center;
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 3em;
-  padding: 0;
-}
-
-.student {
+/* .student {
   border: 2px solid #be1c3f;
   border-radius: 3px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
@@ -120,4 +131,4 @@ code {
   position: relative;
   padding: 10px;
   overflow: hidden;
-}
+} */
