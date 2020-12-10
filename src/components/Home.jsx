@@ -5,7 +5,7 @@ const Home = () => {
     <div>
       <h1>
         Welcome to Northcoders News! The home of news that may or may not
-        actually be news!
+        actually be news! Please login below:
       </h1>
     </div>
   );

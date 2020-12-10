@@ -4,8 +4,8 @@ const ncNewsApi = axios.create({
   baseURL: "https://liams-main-nc-news.herokuapp.com/api",
 });
 
-export const getArticles = () => {
-  return ncNewsApi.get("/articles").then(({ data }) => {
+export const getArticles = (topic) => {
+  return ncNewsApi.get("/articles", { params: { topic } }).then(({ data }) => {
     return data.articles;
   });
 };
@@ -19,5 +19,24 @@ export const getSingleArticle = (id) => {
 export const getTopics = () => {
   return ncNewsApi.get("/topics").then(({ data }) => {
     return data.topics;
+  });
+};
+
+export const getUsers = () => {
+  return ncNewsApi.get("/users").then(({ data }) => {
+    return data.users;
+  });
+};
+
+export const getSingleUser = (username) => {
+  return ncNewsApi.get(`/users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};
+
+export const getComments = (id) => {
+  return ncNewsApi.get(`/articles/${id}/comments`).then(({ data }) => {
+    console.log(data);
+    return data.comments;
   });
 };

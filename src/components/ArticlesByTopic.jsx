@@ -1,10 +1,9 @@
 import React from "react";
-import { getArticles } from "../api";
+import { getArticlesByTopic, getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
-
 import ReactLoading from "react-loading";
 
-class Articles extends React.Component {
+class ArticlesByTopics extends React.Component {
   state = {
     articles: [],
     isLoading: true,
@@ -20,19 +19,10 @@ class Articles extends React.Component {
   render() {
     const { articles, isLoading } = this.state;
     if (isLoading) {
-      return (
-        <div className="loading">
-          <ReactLoading type={"bars"} color={"grey"} />
-        </div>
-      );
+      return <ReactLoading type={"bars"} color={"grey"} />;
     } else {
       return (
         <section>
-          {this.props.topic ? (
-            <h2>All Articles in {this.props.topic.toUpperCase()}:</h2>
-          ) : (
-            <h2>All Articles:</h2>
-          )}
           <ul className="list">
             {articles.map((article) => {
               return <ArticleCard key={article.article_id} {...article} />;
@@ -44,4 +34,4 @@ class Articles extends React.Component {
   }
 }
 
-export default Articles;
+export default ArticlesByTopics;

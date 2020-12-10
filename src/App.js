@@ -7,24 +7,35 @@ import Navbar from "./components/Navbar";
 import Users from "./components/Users";
 import Topics from "./components/Topics";
 import SingleArticle from "./components/SingleArticle";
+import UserProfile from "./components/UserProfile";
+import PostComment from "./components/PostComment";
+import Login from "./components/Login";
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Navbar />
-      <div className="main-body">
-        <Router>
-          <Home path="/" />
-          <Articles path="/articles" />
-          <Topics path="/topics" />
-          <Users path="/users" />
-          <SingleArticle path="/articles/:article_id" />
-          {/* <ErrorMessage default errorMessage='Page not found! :('/> */}
-        </Router>
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <Navbar />
+        <div className="main-body">
+          <Router>
+            <Home path="/" />
+            <Login path="/login" />
+
+            <Articles path="/articles" />
+            <SingleArticle path="/articles/:article_id" />
+
+            <Topics path="/topics" />
+            <Articles path="/topics/:topic" />
+
+            <Users path="/users" />
+            <UserProfile path="/users/:username" />
+            {/* <ErrorMessage default errorMessage='Page not found! :('/> */}
+          </Router>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

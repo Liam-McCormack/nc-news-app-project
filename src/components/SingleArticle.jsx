@@ -1,6 +1,9 @@
 import React from "react";
 import { getSingleArticle } from "../api";
 import ReactLoading from "react-loading";
+import { Link } from "@reach/router";
+import Comments from "./Comments";
+import PostComment from "./PostComment";
 
 class SingleArticle extends React.Component {
   state = {
@@ -16,11 +19,9 @@ class SingleArticle extends React.Component {
       comment_count: 7,
     },
     isLoading: true,
+    showComments: false,
+    addComment: false,
   };
-
-  //put the data from api in the state, helps us build up UI before request
-  //Don't have to keep checking console.log(), remove placeholder once we're ready
-  //fetch the data from api for single article
 
   componentDidMount() {
     const id = this.props.article_id;
@@ -29,25 +30,58 @@ class SingleArticle extends React.Component {
     });
   }
 
-  render() {
-    //404 - not found
-    //display "article not found" redirect to games list to keep users
+  commentsOnClick = () => {
+    if (this.state.showComments) this.setState({ showComments: false });
+    else this.setState({ showComments: true });
+  };
 
-    //const {article} = this.state
+  postComment = () => {
+    if (this.state.addComment) this.setState({ addComment: false });
+    else this.setState({ addComment: true });
+  };
+
+  render() {
     const { article, isLoading } = this.state;
 
     if (isLoading) {
-      return <ReactLoading type={"bars"} color={"grey"} />;
+      return (
+        <div className="loading">
+          <ReactLoading type={"bars"} color={"grey"} />
+        </div>
+      );
     } else {
       return (
-        <section>
-          {/* <p>Hello article {this.props.article_id}</p> */}
+        <section className="single-article">
           <h2>{article.title}</h2>
           <p>
-            by {article.author} in '{article.topic.toUpperCase()}'
+            by <Link to={`/users/${article.author}`}>{article.author}</Link> in
+            '{article.topic.toUpperCase()}'
           </p>
           <br></br>
           <p>{article.body}</p>
+          <p>Total votes: {article.votes}</p>
+          <button>👍</button>
+          <button>👎</button>
+          <br></br>
+          <br></br>
+
+          {this.state.showComments ? (
+            <>
+              <button onClick={this.commentsOnClick}>Hide Comments</button>
+              <br></br>
+              <button onClick={this.postComment}>Add Comment</button>
+            </>
+          ) : (
+            <button onClick={this.commentsOnClick}>Show Comments</button>
+          )}
+
+          {this.state.addComment && this.state.showComments ? (
+            <PostComment />
+          ) : null}
+
+          {this.state.showComments ? (
+            <Comments article_id={article.article_id} />
+          ) : null}
         </section>
       );
     }
