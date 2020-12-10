@@ -1,31 +1,35 @@
 import React from "react";
+import { UserContext } from "../contexts/User";
 
 class PostComment extends React.Component {
   state = {
-    comment: {},
+    username: `${this.context.loggedInUser}`,
+    body: "",
+    placeholder: "Add your comment here",
   };
 
   handleChange = (event) => {
+    console.log(this.context.loggedInUser);
     const { value, name } = event.target;
     //using [name], we can use handleChange for other state properties
     this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
-    const { comment } = this.state;
-    const { addComment } = this.props;
+    const { body, username } = this.state;
+    const { postComment } = this.props;
     event.preventDefault();
-    // addComment({comment, username}) //from comment list comp, inside it passes the post api request
+    postComment({ username, body });
+    event.target.reset();
   };
 
   render() {
     return (
       <section>
         <form className="comment-form" onSubmit={this.handleSubmit}>
-          {/* <input type="text" name="name" placeholder="Your Name" required /> */}
           <textarea
-            name="comment"
-            placeholder="Add your comment here"
+            name="body"
+            placeholder={this.state.placeholder}
             required
             onChange={this.handleChange}
           />
@@ -37,5 +41,7 @@ class PostComment extends React.Component {
     );
   }
 }
+
+PostComment.contextType = UserContext;
 
 export default PostComment;

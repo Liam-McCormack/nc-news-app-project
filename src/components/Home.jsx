@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 const Home = () => {
+  const { loggedInUser, logout } = useContext(UserContext);
   return (
     <div>
-      <h1>
-        Welcome to Northcoders News! The home of news that may or may not
-        actually be news! Please login below:
-      </h1>
+      <h1>{`Welcome ${loggedInUser}`}!</h1>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 };

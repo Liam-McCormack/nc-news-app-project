@@ -34,6 +34,48 @@ button {
   margin: 5px;
 }
 
+/* LOGIN */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  background-color: #bb1919;
+  color: white;
+  text-align: center;
+  width: 100%;
+  height: 90vh;
+  border: 2px solid black;
+  border-radius: 5px;
+  justify-content: center;
+  overflow: hidden auto;
+  margin-top: 1em;
+}
+
+.login-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  margin: 20px;
+}
+
+.login-body h1 {
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+.login-body input {
+  font-size: 1rem;
+}
+
+.login-body button {
+  width: 8em;
+  height: 2em;
+  font-size: 1rem;
+}
+
 /* NAVBAR */
 
 .navbar {

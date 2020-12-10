@@ -8,32 +8,65 @@ import Users from "./components/Users";
 import Topics from "./components/Topics";
 import SingleArticle from "./components/SingleArticle";
 import UserProfile from "./components/UserProfile";
-import PostComment from "./components/PostComment";
+// import PostComment from "./components/PostComment";
 import Login from "./components/Login";
+import { UserContext } from "./contexts/User";
 
 class App extends React.Component {
+  state = {
+    loggedInUser: "",
+  };
+
+  logout = () => {
+    this.setState({ loggedInUser: null });
+  };
+
+  login = (newUser) => {
+    console.log("in login");
+    this.setState({ loggedInUser: newUser });
+  };
+
   render() {
+    const { loggedInUser } = this.state;
     return (
-      <div className="App">
-        <Header />
-        <Navbar />
-        <div className="main-body">
-          <Router>
-            <Home path="/" />
-            <Login path="/login" />
+      <UserContext.Provider
+        value={{ loggedInUser, logout: this.logout, login: this.login }}
+      >
+        <div className="App">
+          {loggedInUser ? (
+            <>
+              <Header />
+              <Navbar />
 
-            <Articles path="/articles" />
-            <SingleArticle path="/articles/:article_id" />
+              <div className="main-body">
+                <Router>
+                  <Home path="/" />
 
-            <Topics path="/topics" />
-            <Articles path="/topics/:topic" />
+                  <Articles path="/articles" />
+                  <SingleArticle path="/articles/:article_id" />
 
-            <Users path="/users" />
-            <UserProfile path="/users/:username" />
-            {/* <ErrorMessage default errorMessage='Page not found! :('/> */}
-          </Router>
+                  <Topics path="/topics" />
+                  <Articles path="/topics/:topic" />
+
+                  <Users path="/users" />
+                  <UserProfile path="/users/:username" />
+                  {/* <ErrorMessage default errorMessage='Page not found! :('/> */}
+                </Router>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <Login
+                  user={this.state.loggedInUser}
+                  login={this.login}
+                  logout={this.logout}
+                />
+              </div>
+            </>
+          )}
         </div>
-      </div>
+      </UserContext.Provider>
     );
   }
 }

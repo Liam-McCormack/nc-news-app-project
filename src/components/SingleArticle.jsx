@@ -3,7 +3,6 @@ import { getSingleArticle } from "../api";
 import ReactLoading from "react-loading";
 import { Link } from "@reach/router";
 import Comments from "./Comments";
-import PostComment from "./PostComment";
 
 class SingleArticle extends React.Component {
   state = {
@@ -35,11 +34,6 @@ class SingleArticle extends React.Component {
     else this.setState({ showComments: true });
   };
 
-  postComment = () => {
-    if (this.state.addComment) this.setState({ addComment: false });
-    else this.setState({ addComment: true });
-  };
-
   render() {
     const { article, isLoading } = this.state;
 
@@ -66,18 +60,10 @@ class SingleArticle extends React.Component {
           <br></br>
 
           {this.state.showComments ? (
-            <>
-              <button onClick={this.commentsOnClick}>Hide Comments</button>
-              <br></br>
-              <button onClick={this.postComment}>Add Comment</button>
-            </>
+            <button onClick={this.commentsOnClick}>Hide Comments</button>
           ) : (
             <button onClick={this.commentsOnClick}>Show Comments</button>
           )}
-
-          {this.state.addComment && this.state.showComments ? (
-            <PostComment />
-          ) : null}
 
           {this.state.showComments ? (
             <Comments article_id={article.article_id} />

@@ -36,7 +36,14 @@ export const getSingleUser = (username) => {
 
 export const getComments = (id) => {
   return ncNewsApi.get(`/articles/${id}/comments`).then(({ data }) => {
-    console.log(data);
     return data.comments;
   });
+};
+
+export const sendComment = (article_id, comment) => {
+  return ncNewsApi
+    .post(`/articles/${article_id}/comments`, comment)
+    .then(({ data }) => {
+      return data.comment[0];
+    });
 };

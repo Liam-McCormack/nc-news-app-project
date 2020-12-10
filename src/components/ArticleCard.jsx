@@ -17,6 +17,7 @@ const ArticleCard = (props) => {
       <p>
         Author: <Link to={`/users/${article.author}`}>{article.author}</Link>
       </p>
+      <p>Votes: {article.votes}</p>
     </div>
   );
 };
