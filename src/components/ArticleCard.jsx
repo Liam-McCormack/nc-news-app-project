@@ -8,16 +8,18 @@ const ArticleCard = (props) => {
       <Link to={`/articles/${article.article_id}`}>
         <h2>{article.title}</h2>
       </Link>
-      <p>
-        Topic:{" "}
-        <Link to={`/topics/${article.topic}`}>
-          {article.topic.toUpperCase()}
-        </Link>
-      </p>
-      <p>
-        Author: <Link to={`/users/${article.author}`}>{article.author}</Link>
-      </p>
-      <p>Votes: {article.votes}</p>
+      <div className="article-details">
+        <p>
+          Topic:{" "}
+          <Link to={`/topics/${article.topic}`}>
+            {article.topic.toUpperCase()}
+          </Link>
+        </p>
+        <p>
+          Author: <Link to={`/users/${article.author}`}>{article.author}</Link>
+        </p>
+        <p>Votes: {article.votes}</p>
+      </div>
     </div>
   );
 };

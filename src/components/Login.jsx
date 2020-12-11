@@ -11,11 +11,11 @@ class Login extends React.Component {
       "weegembump",
       "jessjelly",
     ],
-    badAttempt: false,
+    badAttempt: 0,
+    recommendUser: "",
   };
 
   handleChange = (event) => {
-    console.log(event.target.value);
     const { value, name } = event.target;
     this.setState({ [name]: value });
   };
@@ -25,13 +25,26 @@ class Login extends React.Component {
     const { users, username } = this.state;
     if (users.includes(username)) login(username);
     else {
-      this.setState({ badAttempt: true });
+      this.setState((currentState) => {
+        let user = "";
+
+        if (currentState.badAttempt > 0) user = currentState.recommendUser;
+        else {
+          user = users[Math.floor(Math.random() * users.length)];
+        }
+
+        const newState = {
+          badAttempt: currentState.badAttempt + 1,
+          recommendUser: user,
+        };
+        return newState;
+      });
     }
   };
 
   render() {
     const { user, login, logout } = this.props;
-
+    const { users } = this.state;
     return (
       <section className="login-container">
         <div className="login-body">
@@ -52,7 +65,9 @@ class Login extends React.Component {
           />
           <button onClick={this.handleClick}>Login</button>
 
-          {this.state.badAttempt ? <p>Psst...try 'jessjelly'!</p> : null}
+          {this.state.badAttempt >= 1 ? (
+            <p>Psst...try '{this.state.recommendUser}'!</p>
+          ) : null}
         </div>
       </section>
     );

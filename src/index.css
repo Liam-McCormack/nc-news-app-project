@@ -165,6 +165,13 @@ ul {
   padding: 20px;
 }
 
+.article-details {
+  display: inline-flex;
+}
+
+.article-details p {
+  margin: 5px;
+}
 /* USERS */
 
 .user-list {
