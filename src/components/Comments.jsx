@@ -3,6 +3,9 @@ import { getComments, sendComment } from "../api";
 import CommentCard from "./CommentCard";
 import ReactLoading from "react-loading";
 import CommentAdder from "./PostComment";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
+import Delete from "./Delete";
 
 class CommentSection extends React.Component {
   state = {
@@ -36,6 +39,7 @@ class CommentSection extends React.Component {
 
   render() {
     const { comments, isLoading } = this.state;
+    const { loggedInUser } = this.context;
     if (isLoading) {
       return (
         <div className="loading">
@@ -57,7 +61,16 @@ class CommentSection extends React.Component {
 
           <ul className="list">
             {comments.map((comment) => {
-              return <CommentCard key={comment.comment_id} {...comment} />;
+              return (
+                <>
+                  <CommentCard key={comment.comment_id} {...comment} />
+                  {/* <Delete
+                    comment_id={comment.comment_id}
+                    article_id={this.props.article_id}
+                    deleteOnClick={this.deleteOnClick}
+                  /> */}
+                </>
+              );
             })}
           </ul>
         </section>
@@ -65,5 +78,7 @@ class CommentSection extends React.Component {
     }
   }
 }
+
+CommentSection.contextType = UserContext;
 
 export default CommentSection;

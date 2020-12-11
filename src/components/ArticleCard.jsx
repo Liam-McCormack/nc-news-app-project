@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { UserContext } from "../contexts/User";
+
+// import Delete from "./Delete";
 
 const ArticleCard = (props) => {
   const article = props;
-  // const { loggedInUser } = useContext(UserContext);
+
   return (
     <div className="article-card">
       <Link to={`/articles/${article.article_id}`}>
@@ -23,7 +24,9 @@ const ArticleCard = (props) => {
         <p>Votes: {article.votes}</p>
         <p>Comments: {article.comment_count}</p>
       </div>
-      {/* {loggedInUser === article.author ? <button>Delete Article</button> : null} */}
+      {/* {loggedInUser === article.author && (
+        <Delete article_id={article.article_id} />
+      )} */}
     </div>
   );
 };

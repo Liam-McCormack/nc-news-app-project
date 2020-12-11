@@ -1,6 +1,9 @@
 import React from "react";
-import { getArticles } from "../api";
+import { getArticles, deleteArticle } from "../api";
+import Delete from "./Delete";
 import ArticleCard from "./ArticleCard";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 import ReactLoading from "react-loading";
 
@@ -17,8 +20,19 @@ class Articles extends React.Component {
     });
   }
 
+  // componentDidUpdate() for deletion?
+
+  deleteOnClick = (article_id) => {
+    deleteArticle(article_id)
+      // .then(alert("Your article has been deleted!"))
+      .catch((error) => {
+        console.dir(error);
+      });
+  };
+
   render() {
     const { articles, isLoading } = this.state;
+    const { loggedInUser } = this.context;
     if (isLoading) {
       return (
         <div className="loading">
@@ -35,7 +49,17 @@ class Articles extends React.Component {
           )}
           <ul className="list">
             {articles.map((article) => {
-              return <ArticleCard key={article.article_id} {...article} />;
+              return (
+                <>
+                  <ArticleCard key={article.article_id} {...article} />
+                  {loggedInUser === article.author && (
+                    <Delete
+                      article_id={article.article_id}
+                      deleteOnClick={this.deleteOnClick}
+                    />
+                  )}
+                </>
+              );
             })}
           </ul>
         </section>
@@ -43,5 +67,7 @@ class Articles extends React.Component {
     }
   }
 }
+
+Articles.contextType = UserContext;
 
 export default Articles;

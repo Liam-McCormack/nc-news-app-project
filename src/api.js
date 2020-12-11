@@ -16,9 +16,16 @@ export const getSingleArticle = (id) => {
   });
 };
 
+export const deleteArticle = (id) => {
+  console.log(id);
+  return ncNewsApi.delete(`/articles/${id}`);
+  // .then(({ data }) => {
+  //   console.log(data);
+  // });
+};
+
 export const patchArticleVotes = (id, vote) => {
   return ncNewsApi.patch(`/articles/${id}`, vote).then(({ data }) => {
-    console.log(data.updatedArticle[0]);
     return data.updatedArticle[0];
   });
 };
