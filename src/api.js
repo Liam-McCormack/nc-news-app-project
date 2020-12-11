@@ -12,8 +12,14 @@ export const getArticles = (topic) => {
 
 export const getSingleArticle = (id) => {
   return ncNewsApi.get(`/articles/${id}`).then(({ data }) => {
-    console.log(data.article);
     return data.article;
+  });
+};
+
+export const patchArticleVotes = (id, vote) => {
+  return ncNewsApi.patch(`/articles/${id}`, vote).then(({ data }) => {
+    console.log(data.updatedArticle[0]);
+    return data.updatedArticle[0];
   });
 };
 

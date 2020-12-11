@@ -145,6 +145,8 @@ ul {
 }
 
 .list {
+  display: flex;
+
   justify-content: center;
   display: inline-flex;
   flex-direction: column;
@@ -163,6 +165,10 @@ ul {
 
 .single-article {
   padding: 20px;
+}
+
+.article-card {
+  margin: 5px;
 }
 
 .article-details {

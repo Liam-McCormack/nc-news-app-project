@@ -1,5 +1,5 @@
 import React from "react";
-import { getSingleArticle } from "../api";
+import { getSingleArticle, patchArticleVotes } from "../api";
 import ReactLoading from "react-loading";
 import { Link } from "@reach/router";
 import Comments from "./Comments";
@@ -20,6 +20,9 @@ class SingleArticle extends React.Component {
     isLoading: true,
     showComments: false,
     addComment: false,
+    inc_votes: 0,
+    upvote: false,
+    downvote: false,
   };
 
   componentDidMount() {
@@ -29,9 +32,46 @@ class SingleArticle extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    //conditional
+    const id = this.props.article_id;
+    const votes = { inc_votes: this.state.inc_votes };
+    patchArticleVotes(id, votes);
+    //error handling
+  }
+
   commentsOnClick = () => {
     if (this.state.showComments) this.setState({ showComments: false });
     else this.setState({ showComments: true });
+  };
+
+  voteOnClick = (value) => {
+    if (value === "upvote") {
+      this.setState((currentState) => {
+        const newState = {
+          ...currentState,
+          article: { ...currentState.article },
+        };
+        newState.article.votes = currentState.article.votes + 1;
+        newState.inc_votes = 1;
+        newState.upvote = true;
+        newState.downvote = false;
+        return newState;
+      });
+    } else if (value === "downvote") {
+      this.setState((currentState) => {
+        const newState = {
+          ...currentState,
+          article: { ...currentState.article },
+        };
+        newState.article.votes = currentState.article.votes - 1;
+        newState.inc_votes = -1;
+        newState.downvote = true;
+        newState.upvote = false;
+
+        return newState;
+      });
+    }
   };
 
   render() {
@@ -54,15 +94,30 @@ class SingleArticle extends React.Component {
           <br></br>
           <p>{article.body}</p>
           <p>Total votes: {article.votes}</p>
-          <button>👍</button>
-          <button>👎</button>
+
+          <button
+            onClick={() => this.voteOnClick("upvote")}
+            disabled={this.state.upvote}
+          >
+            👍
+          </button>
+          <button
+            onClick={() => this.voteOnClick("downvote")}
+            disabled={this.state.downvote}
+          >
+            👎
+          </button>
           <br></br>
           <br></br>
 
           {this.state.showComments ? (
-            <button onClick={this.commentsOnClick}>Hide Comments</button>
+            <button onClick={this.commentsOnClick} value="upvote">
+              Hide Comments
+            </button>
           ) : (
-            <button onClick={this.commentsOnClick}>Show Comments</button>
+            <button onClick={this.commentsOnClick} value="downvote">
+              Show Comments
+            </button>
           )}
 
           {this.state.showComments ? (
